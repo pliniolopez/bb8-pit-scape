@@ -17,7 +17,7 @@ pitchMotor.setVelocity(0.0)
 # This is the time interval between direction switches.
 # The robot will start by going forward and will go backward after
 # this time interval, and so on.
-timeInterval = 1.5
+timeInterval = 1.6
 
 # At first we go forward.
 pitchMotor.setVelocity(maxSpeed)
