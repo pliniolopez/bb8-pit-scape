@@ -25,16 +25,15 @@ timeInterval = 2.0
 pitchMotor.setVelocity(maxSpeed)
 forward = True
 lastTime = 0
-
+values_old=gyro.getValues()
 while robot.step(timestep) != -1:
     now = robot.getTime()
-    values_old=gyro.getValues()
     #print(values)
     # We check if enough time has elapsed.
     if now - lastTime > timeInterval:
         # If yes, then we switch directions.
         values_new=gyro.getValues()
-        if values_new[1]-values_old[1]>0.0:
+        if values_new[1]-values_old[1]>0.1:
             forward=True
         else:
             forward=False
