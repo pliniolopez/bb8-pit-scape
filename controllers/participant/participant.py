@@ -29,7 +29,7 @@ lastTime = 0
 while robot.step(timestep) != -1:
     now = robot.getTime()
     values_old=gyro.getValues()
-    print(values)
+    #print(values)
     # We check if enough time has elapsed.
     if now - lastTime > timeInterval:
         # If yes, then we switch directions.
