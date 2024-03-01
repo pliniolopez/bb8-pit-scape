@@ -19,7 +19,7 @@ gyro.enable(timestep)
 # This is the time interval between direction switches.
 # The robot will start by going forward and will go backward after
 # this time interval, and so on.
-timeInterval = 1.8
+timeInterval = 1.5
 
 # At first we go forward.
 pitchMotor.setVelocity(maxSpeed)
@@ -35,18 +35,14 @@ while robot.step(timestep) != -1:
         values_new=gyro.getValues()
         delta =values_new[1]-values_old[1]
         #print(delta) 
-        if delta>0.05 and delta<7:
-            #forward=True
+        if delta>0.1:
+            #aceleracao positiva
             pitchMotor.setVelocity(maxSpeed)
-        elif delta<0.05 and delta<-7:
-            #forward=False
+        elif delta<-0.1:
+            #aceleracao negativa
             pitchMotor.setVelocity(-maxSpeed)
         else:
+            #aceleracao proxima de zero
             pitchMotor.setVelocity(0.0)
-        #if forward:
-        #    pitchMotor.setVelocity(maxSpeed)
-        #else:
-        #    pitchMotor.setVelocity(-maxSpeed)
-        #forward = not forward
         lastTime = now
         values_old=gyro.getValues()
