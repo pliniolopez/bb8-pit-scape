@@ -1,7 +1,7 @@
 """Sample Webots controller for the pit escape benchmark."""
 
 from controller import Robot
-
+import numpy as np
 robot = Robot()
 
 timestep = int(robot.getBasicTimeStep())
@@ -25,6 +25,7 @@ timeInterval = 1.5
 pitchMotor.setVelocity(maxSpeed)
 forward = True
 lastTime = 0
+limiar=0.05
 values_old=gyro.getValues()
 while robot.step(timestep) != -1:
     now = robot.getTime()
@@ -34,11 +35,11 @@ while robot.step(timestep) != -1:
         # If yes, then we switch directions.
         values_new=gyro.getValues()
         delta =values_new[1]-values_old[1]
-        #print(delta) 
-        if delta>0.1:
+        print(delta) 
+        if delta>limiar:
             #aceleracao positiva
             pitchMotor.setVelocity(maxSpeed)
-        elif delta<-0.1:
+        elif delta<-limiar:
             #aceleracao negativa
             pitchMotor.setVelocity(-maxSpeed)
         else:
@@ -46,3 +47,4 @@ while robot.step(timestep) != -1:
             pitchMotor.setVelocity(0.0)
         lastTime = now
         values_old=gyro.getValues()
+    #print(values_old)
